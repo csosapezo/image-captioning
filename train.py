@@ -64,7 +64,7 @@ def train(model_path, validation=False, base_image_mode=InceptionV3):
     if not validation:
         log.info(f"Training {coach.model.__class__.__name__} on {len(captions_train)} training samples...")
         train_history = coach.train(image_dict_path=features_dict_path,
-                                    captions_vector=captions_val,
+                                    captions_vector=captions_train,
                                     epochs=constants.EPOCHS,
                                     batch_size=constants.BATCH_SIZE,
                                     verbose=constants.VERBOSE)

@@ -34,13 +34,13 @@ TEST_SIZE = 0.25
 # Image captioning model
 DROPOUT = 0.5
 EMBEDDING_DIM = 256
-LEARNING_RATE = 0.01
+LEARNING_RATE = 0.015
 EPOCHS = 100
-BATCH_SIZE = 32
+BATCH_SIZE = 128
 VERBOSE = True
 SAVE_DIR = 'model/weights'
 FILENAME = 'model_{epochs}epochs_{name}'
-MAX_LENGTH = 48
+
 
 # Extensions
 MODEL_EXT = '.h5'
