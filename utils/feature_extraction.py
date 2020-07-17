@@ -27,14 +27,19 @@ class FeatureExtractor:
         with open(filename, "wb+") as f:
             Pickler(f).dump(feature_dict)
 
+    def load_and_preprocess_one(self, path):
+        img = self.image_loader.load(path)
+        feature = self.model.predict(img)
+        feature = np.reshape(feature, feature.shape[1])
+
+        return feature
+
     def __call__(self, dump_dir=constants.TEMP_DIR):
         unique_image_paths = sorted(set(self.image_paths))
         feature_dict = {}
 
         for path in tqdm(unique_image_paths):
-            img = self.image_loader.load(path)
-            feature = self.model.predict(img)
-            feature = np.reshape(feature, feature.shape[1])
+            feature = self.load_and_preprocess_one(path)
             feature_dict[path] = feature
 
         self._save_feature_dict(dump_dir=dump_dir, feature_dict=feature_dict)

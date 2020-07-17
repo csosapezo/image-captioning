@@ -40,7 +40,7 @@ class DataLoader:
     def _load_captions(self):
         log.info("Loading captions from annotation files...")
         for ann in tqdm(self.annotations):
-            caption = constants.START_SEQ + ann['caption'] + constants.END_SEQ
+            caption = constants.START_SEQ + constants.BLANK + ann['caption'] + constants.BLANK + constants.END_SEQ
             image_id = ann['image_id']
             image_path = constants.IMAGE_PATH.format(images_dir=self.data_dir,
                                                      data_type=self.data_type,

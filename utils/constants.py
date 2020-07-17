@@ -1,10 +1,11 @@
 # Utils
 RANDOM_STATE = 0
 ERROR_EXIT = 1
+BLANK = ' '
 
 # Captions loading
-START_SEQ = '<start> '
-END_SEQ = ' <end>'
+START_SEQ = '<start>'
+END_SEQ = '<end>'
 
 # Image loading and preprocessing
 IMAGE_PATH = '{images_dir}/image/COCO_{data_type}_{image_id}.jpg'
@@ -23,6 +24,8 @@ TOP_KEYS = 6000
 FILTERS = '!"#$%&()*+.,-/:;=?@[\]^_`{|}~ '
 UNKNOWN = '<unknown>'
 PAD = '<pad>'
+CAPTIONS_VECTOR_FILE_NAME = 'captions_vector'
+TOKENIZER_FILE_NAME = 'tokenizer'
 
 
 # Captioning preprocessing
@@ -32,11 +35,12 @@ TEST_SIZE = 0.25
 DROPOUT = 0.5
 EMBEDDING_DIM = 256
 LEARNING_RATE = 0.01
-EPOCHS = 30
+EPOCHS = 100
 BATCH_SIZE = 32
 VERBOSE = True
 SAVE_DIR = 'model/weights'
 FILENAME = 'model_{epochs}epochs_{name}'
+MAX_LENGTH = 48
 
 # Extensions
 MODEL_EXT = '.h5'

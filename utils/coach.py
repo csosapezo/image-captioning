@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 
 
 class Coach:
-    def __init__(self,max_length, vocabulary_size, model=ImageCaptioningModel, generator=data_generator):
+    def __init__(self, max_length, vocabulary_size, model=ImageCaptioningModel, generator=data_generator):
         self.generator = generator
         self.max_length = max_length
         self.vocabulary_size = vocabulary_size
@@ -32,7 +32,7 @@ class Coach:
 
             return features_dict
 
-    def _predict_word(self, feature_vector, tokenizer):
+    def predict_word(self, feature_vector, tokenizer):
         cur_seq = constants.START_SEQ
         predicted_caption = []
         partial_captions = np.zeros(self.max_length)
@@ -69,8 +69,9 @@ class Coach:
         log.info(f"Validating {self.model.__class__.__name__} on {len(captions_vector)} samples...")
         for key, sequence in tqdm(captions_vector):
             feature_vector = features_dict[key]
-            predicted_caption = self._predict_word(feature_vector, tokenizer)
-            real_caption = tokenizer.sequences_to_texts(sequence)
+            predicted_caption = self.predict_word(feature_vector, tokenizer)
+            real_caption = tokenizer.sequences_to_texts([list(sequence)])[0].split()
+            real_caption.pop(0)
             bleu_score += sentence_bleu([real_caption], predicted_caption)
 
         bleu_score /= len(captions_vector)
