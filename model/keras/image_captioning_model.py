@@ -31,20 +31,13 @@ class ImageCaptioningModel:
         input_layer=Concatenate()([feature_extraction_output,atencion])
 
         # decoder
-        # decoder_input = add([ input_layer])
         decoder_hidden = Dense(embedding_dim, activation='relu')(input_layer)
         outputs = Dense(vocabulary_size, activation='softmax')(decoder_hidden)
-
-        # attn_out, attn_states = attn_layer([feature_extraction_output, partial_captions])
-        # decoder_concat_input = Concatenate(axis=-1, name='concat_layer')([outputs, attn_out])
-        # dense = Dense(vocabulary_size, activation='softmax', name='softmax_layer')
-        # dense_time = TimeDistributed(dense, name='time_distributed_layer')
-        # decoder_pred = dense_time(decoder_concat_input)
 
         # full model
         self.model = Model(inputs=[image_features, partial_captions], outputs=outputs)
         self.model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate))
-        plot_model(self.model,to_file='model.png')
+        plot_model(self.model, to_file='model.png')
 
     def fit(self, generator, epochs, train_size, batch_size, verbose):
         self.epochs = epochs

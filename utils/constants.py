@@ -29,7 +29,7 @@ TOKENIZER_FILE_NAME = 'tokenizer'
 
 
 # Captioning preprocessing
-TEST_SIZE = 0.25
+TEST_SIZE = 0.1
 
 # Image captioning model
 DROPOUT = 0.5

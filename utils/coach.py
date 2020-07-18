@@ -71,6 +71,8 @@ class Coach:
             feature_vector = features_dict[key]
             predicted_caption = self.predict_word(feature_vector, tokenizer)
             real_caption = tokenizer.sequences_to_texts([list(sequence)])[0].split()
+            print(real_caption)
+            input(predicted_caption)
             real_caption.pop(0)
             bleu_score += sentence_bleu([real_caption], predicted_caption)
 
